@@ -1,0 +1,125 @@
+//////////////////action.c
+/////lumière
+extern GLfloat rotSoa;
+extern GLfloat rotSa;
+extern int rotSx;
+extern int rotSy;
+extern int rotSz;
+
+extern int rotSox;
+extern int rotSoy;
+extern int rotSoz;
+///////////
+
+/////lumière
+   case 't':
+        rotSox=1;
+        rotSoy=0;
+        rotSoz=0;
+        rotSoa+=2;
+        rotSoa = rotSoa>=360? 0 : rotSoa;
+        break;
+
+    case 'y':
+        rotSox=1;
+        rotSoy=0;
+        rotSoz=0;
+        rotSoa-=2;
+        rotSoa = rotSoa<=0? 360 : rotSoa;
+        break;
+
+    case 'u':
+        rotSox=0;
+        rotSoy=1;
+        rotSoz=0;
+        rotSoa+=2;
+        rotSoa = rotSoa>=360? 0 : rotSoa;
+        break;
+
+    case 'o':
+        rotSox=0;
+        rotSoy=1;
+        rotSoz=0;
+        rotSoa-=2;
+        rotSoa = rotSoa<=0? 360 : rotSoa;
+        break;
+
+    case 'p':
+        rotSox=0;
+        rotSoy=0;
+        rotSoz=1;
+        rotSoa+=2;
+        rotSoa = rotSoa>=360? 0 : rotSoa;
+        break;
+
+    case 'm':
+        rotSox=0;
+        rotSoy=0;
+        rotSoz=1;
+        rotSoa-=2;
+        rotSoa = rotSoa<=0? 360 : rotSoa;
+        break;
+//////////:
+
+-----------------------------------------------------------------
+////////////////main.c
+#define LUMIERE_POSITIONNELLE 1.0
+#define LUMIERE_DIRECTIONNELLE 0.0
+
+
+/////////lumière
+GLfloat rotSa=0;
+int rotSx=1;
+int rotSy=0;
+int rotSz=0;
+
+int rotSox=1;
+int rotSoy=0;
+int rotSoz=0;
+
+GLfloat traSox=2;
+GLfloat traSoy=2;
+GLfloat traSoz=0;
+GLfloat rotSoa=0;
+//////////:
+////modelisation:
+
+
+//lumiere a l'oeil
+
+    glPushMatrix();
+    {
+
+
+        glTranslatef(traSox, traSoy, traSoz);
+        glRotatef(rotSoa,rotSox,rotSoy,rotSoz);
+
+        GLfloat direction[4]={1.0,0.0,0.0,LUMIERE_DIRECTIONNELLE};
+        glLightfv(GL_LIGHT0,GL_POSITION,direction);
+ 
+        {
+            glDisable(GL_LIGHTING);
+            glColor3ub(255,255,0); //ou glColor3f(1.0f,1.0f,0.0f);
+            //glutSolidSphere(0.1,10,10);
+            glEnable(GL_LIGHTING);
+        }
+    }
+    glPopMatrix();
+//////////////////////////////
+----------------------------------------------------------
+/////////////////init.c
+//La lumiere
+    glEnable(GL_LIGHTING);
+    glEnable(GL_COLOR_MATERIAL);
+    {
+        GLfloat ambiente[4]={0.0,0.0,0.0,0.0};
+        glLightfv(GL_LIGHT0,GL_AMBIENT,ambiente);
+        GLfloat speculaire[4]={0.5,0.5,0.5,0.0};
+        glLightfv(GL_LIGHT0,GL_SPECULAR,speculaire);
+        glEnable(GL_LIGHT0);
+    }
+    {
+        GLfloat lumiere_ambiante[4]={0.1,0.1,0.1,0.0};//10%
+        glLightModelfv(GL_LIGHT_MODEL_AMBIENT,lumiere_ambiante);
+    }
+-------------------------------------------------------
