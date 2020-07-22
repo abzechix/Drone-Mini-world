@@ -1,0 +1,19 @@
+In this project i discovered OpenGL Library with C programming language,
+I had an idea of Creating a drone that can move in a limited area.
+I created the drone and some obstacles that makes the user sees the movement while he is controlling the drone around and change the camera view.
+This project is not so advanced, there is just the basic commands,
+to run the project make the makefile.
+Movements : 
+Z: move to front 
+S: Move to back
+Q: move to left
+D: move to right
+R: move up
+F: move down
+V: move to the initial place
+
+View : 
+V : Drone Camera 
+G : main camera 
+arrow keys : camera angle
+B : white blend
